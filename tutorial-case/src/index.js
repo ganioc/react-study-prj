@@ -3,44 +3,54 @@ import ReactDOM from 'react-dom'
 
 import './index.css'
 
-class ShoppingList extends React.Component {
+// class ShoppingList extends React.Component {
+//     render() {
+//         return (
+//             <div className="shopping-list">
+//                 <h1>Shopping List for {this.props.name}</h1>
+//                 <ul>
+//                     <li>Instagram</li>
+//                     <li>WhatsApp</li>
+//                     <li>Oculus</li>
+//                 </ul>
+//             </div >
+//         );
+//     }
+// }
+////////////////////////////////////////////////
+class Square extends React.Component {
     render() {
         return (
-            <div className="shopping-list">
-                <h1>Shopping List for {this.props.name}</h1>
-                <ul>
-                    <li>Instagram</li>
-                    <li>WhatsApp</li>
-                    <li>Oculus</li>
-                </ul>
-            </div >
-        );
+            <button
+                className="square"
+                onClick={() =>
+                    // alert('click')
+                    this.props.onClick()
+                }>
+                {this.props.value}
+            </button>)
     }
 }
-////////////////////////////////////////////////
-class Square extends React.Component{
-    constructor(props){
-        super(props);
+class Board extends React.Component {
+    constructor(props) {
+        super(props)
         this.state = {
-            value: null
+            squares: Array(9).fill(null)
         }
     }
-    render(){
-        return(<button className="square" onClick={()=>
-            // alert('click')
-            this.setState({value:'X'})
-        }>
-            {this.state.value}
-        </button>)
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({ squares: squares })
     }
-}
-class Board extends React.Component{
-    renderSquare(i){
-        return <Square value={i} />;
+    renderSquare(i) {
+        return <Square
+            value={this.state.squares[i]}
+            onClick={() => this.handleClick(i)} />;
     }
-    render(){
+    render() {
         const status = 'Next player: X';
-        return(
+        return (
             <div>
                 <div className="status">{status}</div>
                 <div className="board-row">
@@ -63,9 +73,9 @@ class Board extends React.Component{
     }
 }
 
-class Game extends React.Component{
-    render(){
-        return(
+class Game extends React.Component {
+    render() {
+        return (
             <div className="game">
                 <div className="game-board">
                     <Board />
