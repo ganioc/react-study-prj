@@ -3,7 +3,12 @@ import React from "react";
 import "./App.css";
 // import { Component } from "react";
 import "./index.css";
-
+// import { Jumbotron , Container, Button} from "react-bootstrap/";
+import { Button } from "reactstrap";
+import { Jumbotron } from "reactstrap";
+import { Row } from "reactstrap";
+import { Col } from "reactstrap";
+import { Container } from "reactstrap";
 interface ISearchProps {
   value: string;
   placeholder: string;
@@ -148,6 +153,7 @@ class App extends React.Component {
 
   constructor(props: {}) {
     super(props);
+
     this.state = {
       searchText: "",
       addresses: [
@@ -171,20 +177,43 @@ class App extends React.Component {
       selected: undefined,
       editmodel: 0,
       formValue: undefined,
-    }
+    };
   }
-  searchInputChange = (event: any)=>{
+  searchInputChange = (event: any) => {
     let value = event.target.value;
     this.setState({
-      searchText: value
-    })
+      searchText: value,
+    });
   }
+  clickFunc = (event:any)=>{
+    event.preventDefault();
+    console.log("Click Me.")
+    alert("Click Me.")
+  }
+
   render() {
     // const {characters} = this.state;
 
     return (
-      <div className="container">
-        <h1>Hello Tutorial!</h1>
+      // <Container className="p-3">
+      //   <Jumbotron>
+      //     <h1 className="header">Welcome To React-Bootstrap</h1>
+      //     <Button variant="danger">Click here</Button>
+      //   </Jumbotron>
+      // </Container>
+      <div>
+        <Jumbotron>
+          <Container>
+            <Row>
+              <Col>
+                <h1>Welcome to Reactstrap</h1>
+                <p>
+                  <Button color="danger" onClick={this.clickFunc}>Click Me</Button>
+                </p>
+              </Col>
+            </Row>
+          </Container>
+        </Jumbotron>
       </div>
     );
   }
