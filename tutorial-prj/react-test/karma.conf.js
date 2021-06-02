@@ -13,8 +13,8 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'test/**/*.js',
-            // 'app/**/*.js',
+            'test/**/*',
+            'app/**/*',
         ],
 
 
@@ -26,8 +26,8 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            // 'app/**/*.js': ['browserify'],
-            'test/**/*.js': ['browserify']
+            'app/**/*': ['browserify'],
+            'test/**/*': ['browserify']
         },
 
         plugins: [
@@ -41,7 +41,7 @@ module.exports = function (config) {
         browserify: {
             debug: true,
             // transform: [ 'reactify', 'rewireify' ]
-            transform: ['babelify']
+            transform: [['babelify', {presets: ['es2015', "react"]} ]]
         },
 
 

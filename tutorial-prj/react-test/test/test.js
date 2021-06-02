@@ -1,9 +1,10 @@
-// import React from 'react';
-var React = require('react')
+//import React from 'react';
+//var React = require('react')
 // import TestUtils from 'react-addons-test-utils';
 
 // let HelloWorld  = require('../app/hello')
 // var HelloWorld = require('../app/hello')
+// import HelloWorld from '../app/hello.jsx'
 
 describe("renderIntoDocument", () => {
 
