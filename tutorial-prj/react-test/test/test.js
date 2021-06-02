@@ -43,5 +43,10 @@ describe("renderIntoDocument", () => {
         let mySubheading = ReactTestUtils.findRenderedDOMComponentWithClass(myComponent, "subheading");
 
         expect(ReactDOM.findDOMNode(mySubheading).innerHTML).toBe("Bleading")
+    });
+    it("should never pass if you try to assert on a whole dom node", ()=>{
+        let myComponent = ReactTestUtils.renderIntoDocument(<HelloWorld name="Bleading"/>)
+
+        // expect(ReactDOM.findDOMNode(myComponent).innerHTML).toBe("Bleading")
     })
 });
