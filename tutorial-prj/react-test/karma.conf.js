@@ -40,8 +40,8 @@ module.exports = function (config) {
 
         browserify: {
             debug: true,
-            // transform: [ 'reactify', 'rewireify' ]
-            transform: [['babelify', {presets: ['es2015', "react"]} ]]
+            //transform: [ 'reactify', 'rewireify' ]
+             transform: [['babelify', {presets: ['es2015', "react"]} ]]
         },
 
 
