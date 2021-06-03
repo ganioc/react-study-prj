@@ -8,7 +8,8 @@ import ReactDOM from 'react-dom'
 // var HelloWorld = require('../app/hello')
 import HelloWorld from '../app/hello'
 import ReactTestUtils  from 'react-dom/test-utils'
-
+import HelloRandom from '../app/hello_random'
+import jasmineReact from "jasmine-react-helpers"
 
 describe("renderIntoDocument", () => {
 
@@ -48,5 +49,14 @@ describe("renderIntoDocument", () => {
         let myComponent = ReactTestUtils.renderIntoDocument(<HelloWorld name="Bleading"/>)
 
         // expect(ReactDOM.findDOMNode(myComponent).innerHTML).toBe("Bleading")
+    })
+    describe("spyOnClass",()=>{
+        it("should be able to spy on a function of a react class", ()=>{
+            // jasmineReact.spyOnClass(HelloRandom, "getRandomAuthor").andReturn({name: "Fake User", githubUsername:"fakeGithub"})
+
+            let myHelloRandom = ReactTestUtils.renderIntoDocument(<HelloRandom />)
+
+            //expect(ReactDOM.findDOMNode(myHelloRandom).textContent).toBe("Fake User is an author and their github handle is fakeGithub")
+        })
     })
 });
