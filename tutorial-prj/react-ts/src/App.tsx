@@ -207,6 +207,7 @@ class App extends React.Component {
             <Row>
               <Col>
                 <h1>Welcome to Reactstrap</h1>
+                <h2>Learn React</h2>
                 <p>
                   <Button color="danger" onClick={this.clickFunc}>Click Me</Button>
                 </p>
