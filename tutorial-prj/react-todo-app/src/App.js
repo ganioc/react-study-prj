@@ -38,7 +38,6 @@ class TodoContainer extends React.Component {
     return (
       <div>
         <TodosList todos={this.state.todos} />
-
       </div>
     )
   }
