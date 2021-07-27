@@ -54,3 +54,6 @@ code {
   text-decoration: none;
   padding: 5px;
 }
+.active {
+  border-bottom: #ebebeb solid 2px;
+}
