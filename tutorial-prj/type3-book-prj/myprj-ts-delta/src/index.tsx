@@ -4,11 +4,11 @@ import "./index.css";
 // import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // import "./custom.scss";
-import Routes from "./Routes";
+import RoutesWrap from "./Routes";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <RoutesWrap />
   </React.StrictMode>,
   document.getElementById("root") as HTMLElement
 );

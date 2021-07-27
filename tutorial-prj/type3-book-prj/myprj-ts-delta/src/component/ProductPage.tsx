@@ -1,36 +1,56 @@
-import * as React from "react";
+import React from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { IProduct, products } from "./ProductsData";
+import ProductsPage from "./ProductsPage";
 
 interface IState {
-  products: IProduct[];
+  product?: IProduct;
+  added: boolean;
 }
+type Props = RouteComponentProps<{ id: string }>;
 
-class ProductsPage extends React.Component<{}, IState> {
-  public constructor(props: {}) {
+class ProductPage extends React.Component<Props, IState> {
+  private handleAddClick = () => {
+    this.setState({ added: true });
+  };
+  public constructor(props: Props) {
     super(props);
     this.state = {
-      products: [],
+      added: false,
     };
   }
+
   public componentDidMount() {
-    this.setState({ products });
+    if (this.props.match.params.id) {
+      const id: number = parseInt(this.props.match.params.id, 10);
+      const product = products.filter((p) => p.id === id)[0];
+
+      this.setState({ product });
+    }
   }
   public render() {
+    const product = this.state.product;
     return (
       <div className="page-container">
-        <p>
-          Welcome to React Shop where you can get all your tools for ReactJS!
-        </p>
-        <ul className="product-list">
-          {this.state.products.map((product) => (
-            <li key={product.id} className="product-list-item">
-              {product.name}
-            </li>
-          ))}
-        </ul>
+        {product ? (
+          <React.Fragment>
+            <h1>{product.name}</h1>
+            <p>{product.description}</p>
+            <p className="product-price">
+              {new Intl.NumberFormat("en-US", {
+                currency: "USD",
+                style: "currency",
+              }).format(product.price)}
+            </p>
+            {!this.state.added && (
+              <button onClick={this.handleAddClick}>Add to basket</button>
+            )}
+          </React.Fragment>
+        ) : (
+          <p>Product not found!</p>
+        )}
       </div>
     );
   }
 }
-
-export default ProductsPage;
+export default ProductPage;
