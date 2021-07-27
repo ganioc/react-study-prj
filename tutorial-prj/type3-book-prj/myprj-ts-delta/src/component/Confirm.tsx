@@ -2,6 +2,7 @@ import React from "react";
 import "./Confirm.scss";
 
 interface IProps {
+  open: boolean;
   title: string;
   content: string;
   cancelCaption?: string;
@@ -17,7 +18,13 @@ class Confirm extends React.Component<IProps> {
   };
   public render() {
     return (
-      <div className="confirm-wrapper confirm-visible">
+      <div
+        className={
+          this.props.open
+            ? "confirm-wrapper confirm-visible"
+            : "confirm-wrapper"
+        }
+      >
         <div className="confirm-container">
           <div className="confirm-title-container">
             <span>{this.props.title} </span>
@@ -26,10 +33,13 @@ class Confirm extends React.Component<IProps> {
             <p>{this.props.content}</p>
           </div>
           <div className="confirm-buttons-container">
-            <button className="confirm-cancel" onClick={this.props.onOkClick}>
+            <button
+              className="confirm-cancel"
+              onClick={this.props.onCancelClick}
+            >
               Cancel
             </button>
-            <button className="confirm-ok" onClick={this.props.onCancelClick}>
+            <button className="confirm-ok" onClick={this.props.onOkClick}>
               Ok
             </button>
           </div>
