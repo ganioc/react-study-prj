@@ -32,6 +32,7 @@ const ContactUs: React.FC<IProps> = (props) => {
         email: { validator: required },
         name: [{ validator: required }, { validator: minLength, arg: 3 }],
       }}
+      onSubmit={}
     >
       <Form.Field name="name" label="Your Name" type="Text" />
       <Form.Field name="email" label="Your email address" type="Email" />

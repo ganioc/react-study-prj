@@ -9,7 +9,10 @@ interface IFieldProps {
   type?: "Text" | "Email" | "Select" | "TextArea";
   options?: string[];
 }
-
+export interface ISubmitResult {
+  success: boolean;
+  errors?: IErrors;
+}
 interface IValidation {
   validator: Validator;
   arg?: any;
@@ -20,6 +23,7 @@ interface IValidationProp {
 interface IFormProps {
   defaultValues: IValues;
   validationRules: IValidationProp;
+  onSubmit: (values: IValues) => Promise<ISubmitResult>;
 }
 interface IErrors {
   [key: string]: string[];
@@ -27,6 +31,8 @@ interface IErrors {
 interface IState {
   values: IValues;
   errors: IErrors;
+  submitting: boolean;
+  submitted: boolean;
 }
 
 interface IFormContext {
@@ -67,6 +73,24 @@ export class Form extends React.Component<IFormProps, IState> {
     const newErrors = { ...this.state.errors, [fieldName]: errors };
     this.setState({ errors: newErrors });
     return errors;
+  };
+  private validateFrom(): boolean {
+    const errors: IErrors = {};
+    let haveError: boolean = false;
+    Object.keys(this.props.defaultValues).map((fieldName) => {
+      errors[fieldName] = this.validate(
+        fieldName,
+        this.state.values[fieldName]
+      );
+      if (errors[fieldName].length > 0) {
+        haveError = true;
+      }
+    });
+    this.setState({ errors });
+    return !haveError;
+  }
+  private handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
   public static Field: React.FC<IFieldProps> = (props) => {
     const { name, label, type, options } = props;
@@ -150,6 +174,8 @@ export class Form extends React.Component<IFormProps, IState> {
     this.state = {
       values: props.defaultValues,
       errors,
+      submitting: false,
+      submitted: false,
     };
   }
   public render() {
@@ -161,8 +187,16 @@ export class Form extends React.Component<IFormProps, IState> {
     };
     return (
       <FormContext.Provider value={context}>
-        <form className="form" noValidate={true}>
+        <form className="form" noValidate={true} onSubmit={this.handleSubmit}>
           {this.props.children}
+          <div className="form-group">
+            <button
+              type="submit"
+              disabled={this.state.submitting || this.state.submitted}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </FormContext.Provider>
     );
