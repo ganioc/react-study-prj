@@ -9,8 +9,17 @@ interface IFieldProps {
   type?: "Text" | "Email" | "Select" | "TextArea";
   options?: string[];
 }
+
+interface IValidation {
+  validator: Validator;
+  arg?: any;
+}
+interface IValidationProp {
+  [key: string]: IValidation | IValidation[];
+}
 interface IFormProps {
   defaultValues: IValues;
+  validationRules: IValidationProp;
 }
 
 interface IState {
@@ -100,3 +109,29 @@ export class Form extends React.Component<IFormProps, IState> {
     );
   }
 }
+
+export type Validator = (
+  fieldName: string,
+  values: IValues,
+  args?: any
+) => string;
+
+export const required: Validator = (
+  fieldName: string,
+  values: IValues,
+  args?: any
+): string =>
+  values[fieldName] === undefined ||
+  values[fieldName] === null ||
+  values[fieldName] === ""
+    ? "This must be populated"
+    : "";
+
+export const minLength: Validator = (
+  fieldName: string,
+  values: IValues,
+  length: number
+): string =>
+  values[fieldName] && values[fieldName].length < length
+    ? `This must be at least ${length} characters`
+    : "";

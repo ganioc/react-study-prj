@@ -1,4 +1,5 @@
 import React from "react";
+import { Form, minLength, required } from "./Form";
 
 interface IProps {
   name: string;
@@ -25,42 +26,23 @@ const ContactUs: React.FC<IProps> = (props) => {
     props.onNotesChange(e.currentTarget.value);
   };
   return (
-    <form className="form" noValidate={true}>
-      <div className="form-group">
-        <label htmlFor="name">Your Name</label>
-        <input
-          type="text"
-          id="name"
-          value={props.name}
-          onChange={handleNameChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email"> Your email address</label>
-        <input
-          type="email"
-          id="email"
-          value={props.email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="reason">Reason you need to contact us</label>{" "}
-        <select id="reason" value={props.reason} onChange={handleReasonChange}>
-          <option value="Marketing">Marketing</option>
-          <option value="Support" selected>
-            Support
-          </option>
-          <option value="Feedback">Feedback</option>
-          <option value="Jobs">Jobs</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label htmlFor="notes">Additional notes</label>
-        <textarea id="notes" value={props.notes} onChange={handleNotesChange} />
-      </div>
-    </form>
+    <Form
+      defaultValues={{ name: "", email: "", reason: "Support", notes: "" }}
+      validationRules={{
+        email: { validator: required },
+        name: [{ validator: required }, { validator: minLength, arg: 3 }],
+      }}
+    >
+      <Form.Field name="name" label="Your Name" type="Text" />
+      <Form.Field name="email" label="Your email address" type="Email" />
+      <Form.Field
+        name="reason"
+        label="Reason you need to contact us"
+        type="Select"
+        options={["Marketing", "Support", "Feedback", "Jobs", "Other"]}
+      />
+      <Form.Field name="notes" label="Additional notes" type="TextArea" />
+    </Form>
   );
 };
 
