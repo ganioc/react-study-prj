@@ -1,12 +1,13 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { IProduct, products } from "./ProductsData";
+import { IProduct, products, getProduct } from "./ProductsData";
 import ProductsPage from "./ProductsPage";
 import Product from "./Product";
 
 interface IState {
   product?: IProduct;
   added: boolean;
+  loading: boolean;
 }
 type Props = RouteComponentProps<{ id: string }>;
 
@@ -18,15 +19,18 @@ class ProductPage extends React.Component<Props, IState> {
     super(props);
     this.state = {
       added: false,
+      loading: true,
     };
   }
 
-  public componentDidMount() {
+  public async componentDidMount() {
     if (this.props.match.params.id) {
       const id: number = parseInt(this.props.match.params.id, 10);
-      const product = products.filter((p) => p.id === id)[0];
-
-      this.setState({ product });
+      //const product = products.filter((p) => p.id === id)[0];
+      const product = await getProduct(id);
+      if (product !== null) {
+        this.setState({ product, loading: false });
+      }
     }
   }
   public render() {
