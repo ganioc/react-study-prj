@@ -37,8 +37,9 @@ class ProductPage extends React.Component<Props, IState> {
     const product = this.state.product;
     return (
       <div className="page-container">
-        {product ? (
+        {product || this.state.loading ? (
           <Product
+            loading={this.state.loading}
             product={product}
             inBasket={this.state.added}
             onAddToBasket={this.handleAddClick}

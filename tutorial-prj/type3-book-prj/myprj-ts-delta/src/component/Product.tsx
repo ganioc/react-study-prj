@@ -1,9 +1,10 @@
 import React from "react";
 import { IProduct, products } from "./ProductsData";
 import Tabs from "./Tabs";
+import withLoader from "./withLoader";
 
 interface IProps {
-  product: IProduct;
+  product?: IProduct;
   inBasket: boolean;
   onAddToBasket: () => void;
 }
@@ -13,6 +14,10 @@ const Product: React.FC<IProps> = (props) => {
   const handleAddClick = () => {
     props.onAddToBasket();
   };
+  if (!product) {
+    return null;
+  }
+
   return (
     <React.Fragment>
       <h1>{product.name}</h1>
@@ -47,4 +52,4 @@ const Product: React.FC<IProps> = (props) => {
   );
 };
 
-export default Product;
+export default withLoader(Product);
