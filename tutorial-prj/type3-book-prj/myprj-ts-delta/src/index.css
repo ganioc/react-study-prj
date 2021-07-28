@@ -28,6 +28,16 @@ code {
 .product-list-item a {
   text-decoration: none;
 }
+
+.product-reviews {
+  list-style: none;
+  padding: 0;
+}
+.product-reviews .product-list-item {
+  display: block;
+  padding: 8px 0px;
+}
+
 .header {
   text-align: center;
   background-color: #222;

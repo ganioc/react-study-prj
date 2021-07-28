@@ -2,6 +2,7 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IProduct, products } from "./ProductsData";
 import ProductsPage from "./ProductsPage";
+import Product from "./Product";
 
 interface IState {
   product?: IProduct;
@@ -33,20 +34,25 @@ class ProductPage extends React.Component<Props, IState> {
     return (
       <div className="page-container">
         {product ? (
-          <React.Fragment>
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p className="product-price">
-              {new Intl.NumberFormat("en-US", {
-                currency: "USD",
-                style: "currency",
-              }).format(product.price)}
-            </p>
-            {!this.state.added && (
-              <button onClick={this.handleAddClick}>Add to basket</button>
-            )}
-          </React.Fragment>
+          <Product
+            product={product}
+            inBasket={this.state.added}
+            onAddToBasket={this.handleAddClick}
+          />
         ) : (
+          // <React.Fragment>
+          //   <h1>{product.name}</h1>
+          //   <p>{product.description}</p>
+          //   <p className="product-price">
+          //     {new Intl.NumberFormat("en-US", {
+          //       currency: "USD",
+          //       style: "currency",
+          //     }).format(product.price)}
+          //   </p>
+          //   {!this.state.added && (
+          //     <button onClick={this.handleAddClick}>Add to basket</button>
+          //   )}
+          // </React.Fragment>
           <p>Product not found!</p>
         )}
       </div>
