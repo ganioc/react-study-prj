@@ -15,6 +15,13 @@ class Header extends React.Component {
           <NavLink to="/products" className="header-link">
             Products
           </NavLink>
+          <NavLink
+            to="/contactus"
+            className="header-link"
+            activeClassName="header-link-active"
+          >
+            Contact Us
+          </NavLink>
           <NavLink to="/admin" className="header-link">
             Admin
           </NavLink>

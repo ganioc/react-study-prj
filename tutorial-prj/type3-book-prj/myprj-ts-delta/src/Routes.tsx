@@ -12,6 +12,7 @@ import NotFoundPage from "./component/NotFoundPage";
 import ProductPage from "./component/ProductPage";
 import ProductsPage from "./component/ProductsPage";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import ContactUsPage from "./component/ContactUsPage";
 
 const RoutesWrap: React.SFC = () => {
   return (
@@ -36,6 +37,7 @@ const Routes: React.SFC<RouteComponentProps> = (props) => {
             <Redirect exact={true} from="/" to="/products" />
             <Route exact={true} path="/products" component={ProductsPage} />
             <Route path="/products/:id" component={ProductPage} />
+            <Route path="/contactus" component={ContactUsPage} />
             <Route path="/admin" component={AdminPage} />
             <Route component={NotFoundPage} />
           </Switch>
