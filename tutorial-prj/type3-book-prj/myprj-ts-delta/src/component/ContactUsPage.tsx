@@ -1,5 +1,7 @@
 import React from "react";
 import ContactUs from "./ContactUs";
+import { ISubmitResult, IValues } from "./Form";
+import { my_wait } from "./ProductsData";
 
 interface IState {
   name: string;
@@ -19,6 +21,15 @@ class ContactUsPage extends React.Component<{}, IState> {
   };
   private handleNotesChange = (notes: string) => {
     this.setState({ notes });
+  };
+  private handleSubmit = async (values: IValues): Promise<ISubmitResult> => {
+    await my_wait(1000);
+    return {
+      errors: {
+        email: ["Something is wrong with email"],
+      },
+      success: false,
+    };
   };
   public constructor(props: {}) {
     super(props);
@@ -45,6 +56,7 @@ class ContactUsPage extends React.Component<{}, IState> {
           onReasonChange={this.handleReasonChange}
           notes={this.state.notes}
           onNotesChange={this.handleNotesChange}
+          onSubmit={this.handleSubmit}
         />
       </div>
     );

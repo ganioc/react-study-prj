@@ -90,7 +90,18 @@ export class Form extends React.Component<IFormProps, IState> {
     return !haveError;
   }
   private handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("submit clicked");
+
     e.preventDefault();
+    if (this.validateFrom()) {
+      this.setState({ submitting: true });
+      const result = await this.props.onSubmit(this.state.values);
+      this.setState({
+        errors: result.errors || {},
+        submitted: result.success,
+        submitting: false,
+      });
+    }
   };
   public static Field: React.FC<IFieldProps> = (props) => {
     const { name, label, type, options } = props;

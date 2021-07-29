@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, minLength, required } from "./Form";
+import { Form, minLength, required, ISubmitResult, IValues } from "./Form";
 
 interface IProps {
   name: string;
@@ -10,6 +10,7 @@ interface IProps {
   onReasonChange: (reason: string) => void;
   notes: string;
   onNotesChange: (notes: string) => void;
+  onSubmit: (values: IValues) => Promise<ISubmitResult>;
 }
 
 const ContactUs: React.FC<IProps> = (props) => {
@@ -25,6 +26,10 @@ const ContactUs: React.FC<IProps> = (props) => {
   const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     props.onNotesChange(e.currentTarget.value);
   };
+  const handleSubmit = async (values: IValues): Promise<ISubmitResult> => {
+    const result = await props.onSubmit(values);
+    return result;
+  };
   return (
     <Form
       defaultValues={{ name: "", email: "", reason: "Support", notes: "" }}
@@ -32,7 +37,7 @@ const ContactUs: React.FC<IProps> = (props) => {
         email: { validator: required },
         name: [{ validator: required }, { validator: minLength, arg: 3 }],
       }}
-      onSubmit={}
+      onSubmit={handleSubmit}
     >
       <Form.Field name="name" label="Your Name" type="Text" />
       <Form.Field name="email" label="Your email address" type="Email" />

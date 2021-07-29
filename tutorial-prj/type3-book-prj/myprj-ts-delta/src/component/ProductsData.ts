@@ -60,7 +60,7 @@ export const products: IProduct[] = [
         ]
     }
 ]
-const my_wait = (ms: number): Promise<void> => {
+export const my_wait = (ms: number): Promise<void> => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 export const getProduct = async (id: number): Promise<IProduct | null> => {
