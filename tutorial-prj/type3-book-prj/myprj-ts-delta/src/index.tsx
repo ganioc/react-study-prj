@@ -5,11 +5,27 @@ import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 // import "./custom.scss";
 import RoutesWrap from "./Routes";
+import { Store } from "redux";
+import { Provider } from "react-redux";
+import configureStore from "./component/Store";
+import { IApplicationState } from "./component/Store";
+
+interface IProps {
+  store: Store<IApplicationState>;
+}
+const Root: React.FC<IProps> = (props) => {
+  return (
+    <Provider store={props.store}>
+      <RoutesWrap />
+    </Provider>
+  );
+};
+const store = configureStore();
+
+// connecting our componensts to the store;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <RoutesWrap />
-  </React.StrictMode>,
+  <Root store={store} />,
   document.getElementById("root") as HTMLElement
 );
 
