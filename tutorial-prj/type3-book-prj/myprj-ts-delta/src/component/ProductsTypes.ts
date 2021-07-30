@@ -10,10 +10,14 @@ export interface IProductsGetAllAction {
     products: IProduct[]
 }
 
-export interface IProductLoadingAction {
+export interface IProductsLoadingAction {
     type: ProductsActionTypes.LOADING,
 
 }
 
-export type ProductsAction = | IProductsGetAllAction | IProductLoadingAction;
+export type ProductsActions = | IProductsGetAllAction | IProductsLoadingAction;
 
+export interface IProductsState {
+    readonly products: IProduct[];
+    readonly productsLoading: boolean;
+}
