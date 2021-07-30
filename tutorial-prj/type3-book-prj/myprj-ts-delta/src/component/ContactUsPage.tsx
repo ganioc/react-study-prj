@@ -23,12 +23,12 @@ class ContactUsPage extends React.Component<{}, IState> {
     this.setState({ notes });
   };
   private handleSubmit = async (values: IValues): Promise<ISubmitResult> => {
-    await my_wait(1000);
+    await my_wait(1600);
     return {
-      errors: {
-        email: ["Something is wrong with email"],
-      },
-      success: false,
+      // errors: {
+      //   email: ["Something is wrong with email"],
+      // },
+      success: true,
     };
   };
   public constructor(props: {}) {
