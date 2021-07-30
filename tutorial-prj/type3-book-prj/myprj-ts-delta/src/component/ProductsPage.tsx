@@ -15,6 +15,7 @@ interface IProps extends RouteComponentProps {
   loading: boolean; // whether products are being fetched,
   products: IProduct[];
 }
+
 class ProductsPage extends React.Component<IProps, IState> {
   // public constructor(props: RouteComponentProps) {
   //   super(props);
