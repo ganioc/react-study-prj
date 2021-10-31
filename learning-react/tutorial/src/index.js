@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 import List from './containers/List';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () =>{
-  return <List />;
+  return (
+  <div className='container-fluid'>
+    <nav className='navbar sticky-top navbar-light bg-dark'>
+      <h1 className='navbar-brand text-light'>movieList</h1>
+    </nav>
+    <List />
+  </div>
+  );
 }
 
 ReactDOM.render(
