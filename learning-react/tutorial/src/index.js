@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+import List from './containers/List';
+
+const App = () =>{
+  return <List />;
+}
 
 ReactDOM.render(
   <React.StrictMode>
