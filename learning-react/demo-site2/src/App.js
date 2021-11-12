@@ -1,6 +1,10 @@
+
 import logo from './logo.svg'
 import React from 'react'
 import './App.css';
+import {createBrowserHistory} from 'history';
+
+const history = createBrowserHistory();
 
 const Route = ({path, component}) => {
   const pathName =  window.location.pathname;
@@ -11,6 +15,17 @@ const Route = ({path, component}) => {
     return null;
   }
 }
+
+const Link = ({ to, children}) => (
+  <a onClick={(e) => {
+    e.preventDefault();
+    history.push(to);
+  }}
+  href={to}
+  >
+    {children}
+  </a>
+)
 
 const Login = ()=>(
   <div>
@@ -34,6 +49,9 @@ const User=()=>(
 )
 
 class App extends React.Component {
+  componentDidMount(){
+    history.listen(()=> this.forceUpdate())
+  }
   render(){
     return (
       <div className="ui text container">
@@ -42,19 +60,19 @@ class App extends React.Component {
         </h2>
         <ul>
           <li>
-            <a href='/admin'>
+            <Link to='/admin'>
               <code>/admin</code>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='/user'>
+            <Link to='/user'>
               <code>/user</code>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='/login'>
+            <Link to='/login'>
               <code>/login</code>
-            </a>
+            </Link>
           </li>
         </ul>
         <hr />
