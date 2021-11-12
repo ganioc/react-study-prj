@@ -1,13 +1,13 @@
-
+import PropTypes from 'prop-types'
 import logo from './logo.svg'
 import React from 'react'
 import './App.css';
 import {createBrowserHistory} from 'history';
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
-const Route = ({path, component}) => {
-  const pathName =  window.location.pathname;
+const Route = ({path, component}, {location}) => {
+  const pathName =  location.pathname;
 
   if(pathName.match(path)){
     return (React.createElement(component))
@@ -15,8 +15,11 @@ const Route = ({path, component}) => {
     return null;
   }
 }
+Route.contextTypes = {
+  location: PropTypes.object
+}
 
-const Link = ({ to, children}) => (
+const Link = ({ to, children}, {history}) => (
   <a onClick={(e) => {
     e.preventDefault();
     history.push(to);
@@ -26,6 +29,30 @@ const Link = ({ to, children}) => (
     {children}
   </a>
 )
+Link.contextTypes = {
+  history: PropTypes.object
+}
+
+class Router extends React.Component{
+  static childContextTypes = {
+    history: PropTypes.object,
+    location: PropTypes.object,
+  }
+  constructor(props){
+    super(props);
+    this.history= createBrowserHistory();
+    this.history.listen(()=> this.forceUpdate())
+  }
+  getChildContext(){
+    return {
+      history: this.history,
+      location: window.location,
+    }
+  }
+  render(){
+    return this.props.children;
+  }
+}
 
 const Login = ()=>(
   <div>
@@ -48,12 +75,8 @@ const User=()=>(
   </div>
 )
 
-class App extends React.Component {
-  componentDidMount(){
-    history.listen(()=> this.forceUpdate())
-  }
-  render(){
-    return (
+const App = ()=> (
+  <Router>
       <div className="ui text container">
         <h2 className='ui dividing header'>
           数据分发组件演示
@@ -80,10 +103,7 @@ class App extends React.Component {
         <Route path='/admin' component={Admin} />
         <Route path='/user'  component={User}  /> 
       </div>
-    );
-  }
-  
-}
+  </Router>)
 
 
 
