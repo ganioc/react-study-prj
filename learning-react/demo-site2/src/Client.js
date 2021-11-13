@@ -5,6 +5,7 @@ class Client{
     constructor(){
         this.useLocalStorage = (typeof localStorage!== 'undefined');
         this.subscribers = [];
+        this.userName = '';
 
         if(this.useLocalStorage){
             this.token = localStorage.getItem(LOCAL_STORAGE_KEY);

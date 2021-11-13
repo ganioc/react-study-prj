@@ -8,7 +8,7 @@ const TopBar = () => {
             <div className='item' />
             <div className='item'>
                 <h1
-                    className='ui green header'
+                    className='ui blue header'
                     style={{ marginTop: '20px' }}
                 >
                     数据分发共享组件演示
