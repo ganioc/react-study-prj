@@ -12,6 +12,7 @@ import {
   Outlet,
   NavLink,
 } from 'react-router-dom';
+import TopBar from './components/TopBar';
 
 const Home = () => (
   <>
@@ -41,7 +42,7 @@ const User = () => (
     <p>User page for Normal User.</p>
   </>
 )
-const Page404 = () => (
+const Page404 = ({location}) => (
   <>
     <h3>404 page</h3>
     <p style={{background: '#ff0000', padding:'1rem', color:'white'}} >Unknown url</p>
@@ -74,7 +75,8 @@ const Layout = () => {
   })
   return (
     <>
-      <h1>数据分发共享组件演示</h1>
+    <TopBar></TopBar>
+    <div className='spacer row' />
     <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
       <NavLink to='/' style={style}>
         <code>home</code>
@@ -82,7 +84,6 @@ const Layout = () => {
       <NavLink to='/admin' style={style}>
         <code>admin</code>
       </NavLink>
-
       <NavLink to='/user' style={style}>
         <code>user</code>
       </NavLink>
@@ -96,6 +97,7 @@ const Layout = () => {
     </>);
 };
 const App = () => (
+  <div className='ui grid'>
   <Router>
     {/* <h2 className='ui dividing header' style={{ padding: '1rem' }}>
       数据分发组件演示
@@ -111,7 +113,8 @@ const App = () => (
         <Route path="*" element={<Page404 />} />
       </Route>
     </Routes>
-  </Router>)
+  </Router>
+  </div>)
 
 
 
