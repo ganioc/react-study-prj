@@ -2,150 +2,115 @@ import PropTypes from 'prop-types'
 import logo from './logo.svg'
 import React from 'react'
 import './App.css';
-import {createBrowserHistory} from 'history';
-import { BrowserRouter as Router,
-          Routes,
-          Route,
-          Link,
-      Redirect} from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Redirect,
+  Outlet,
+  NavLink,
+} from 'react-router-dom';
 
-// const history = createBrowserHistory();
-
-// const Route = ({path, component}, {location}) => {
-//   const pathName =  location.pathname;
-
-//   if(pathName.match(path)){
-//     return (React.createElement(component))
-//   }else{
-//     return null;
-//   }
-// }
-// Route.contextTypes = {
-//   location: PropTypes.object
-// }
-
-// const Link = ({ to, children}, {history}) => (
-//   <a onClick={(e) => {
-//     e.preventDefault();
-//     history.push(to);
-//   }}
-//   href={to}
-//   >
-//     {children}
-//   </a>
-// )
-// Link.contextTypes = {
-//   history: PropTypes.object
-// }
-
-// class Redirect extends React.Component{
-//   static contextType = {
-//     history: PropTypes.object
-//   }
-//   componentDidMount(){
-//     const history = this.context.history;
-//     const to = this.props.to;
-//     history.push(to)
-//   }
-//   render(){
-//     return null;
-//   }
-// }
-
-// class Router extends React.Component{
-//   static childContextTypes = {
-//     history: PropTypes.object,
-//     location: PropTypes.object,
-//   }
-//   constructor(props){
-//     super(props);
-//     this.history= createBrowserHistory();
-//     this.history.listen(()=> this.forceUpdate())
-//   }
-//   getChildContext(){
-//     return {
-//       history: this.history,
-//       location: window.location,
-//     }
-//   }
-//   render(){
-//     return this.props.children;
-//   }
-// }
-
-const Home = ()=>(
-  <div>
+const Home = () => (
+  <>
     <h3>主页</h3>
     <p>Home Page</p>
-  </div>
+  </>
 )
 
 
-
-const Login = ()=>(
-  <div>
+const Login = () => (
+  <>
     <h3>登录</h3>
     <p>用户登录</p>
-  </div>
+  </>
 )
 
-const Admin=()=>(
-  <div>
+const Admin = () => (
+  <>
     <h3>Admin Page</h3>
     <p>Admin can manipulate the creation of users.</p>
-  </div>
+  </>
 )
 
-const User=()=>(
-  <div>
+const User = () => (
+  <>
     <h3>User Page</h3>
     <p>User page for Normal User.</p>
-  </div>
+  </>
 )
 const Page404 = () => (
-  <div>
+  <>
     <h3>404 page</h3>
-    <p>Unknown url</p>
-  </div>
+    <p style={{background: '#ff0000', padding:'1rem', color:'white'}} >Unknown url</p>
+    <Link to="/">home</Link>
+  </>
 )
+const Navigation = () => {
+  return (
+    <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
+      <Link to='/' style={{ padding: 5 }}>
+        <code>home</code>
+      </Link>
+      <Link to='/admin' style={{ padding: 5 }}>
+        <code>admin</code>
+      </Link>
 
-const App = ()=> (
+      <Link to='/user' style={{ padding: 5 }}>
+        <code>user</code>
+      </Link>
+      <Link to='/login' style={{ padding: 5 }}>
+        <code>login</code>
+      </Link>
+    </nav>
+  )
+}
+const Layout = () => {
+  const style = ({ isActive })=> ({
+    fontWeight: isActive? 'bold': 'normal',
+    padding: 5,
+  })
+  return (
+    <>
+      <h1>数据分发共享组件演示</h1>
+    <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
+      <NavLink to='/' style={style}>
+        <code>home</code>
+      </NavLink>
+      <NavLink to='/admin' style={style}>
+        <code>admin</code>
+      </NavLink>
+
+      <NavLink to='/user' style={style}>
+        <code>user</code>
+      </NavLink>
+      <NavLink to='/login' style={style}>
+        <code>login</code>
+      </NavLink>
+    </nav>
+      <main style={{ padding: '1rem 1rem' }}>
+        <Outlet />
+      </main>
+    </>);
+};
+const App = () => (
   <Router>
-      <div className="ui text container">
-        <h2 className='ui dividing header'>
-          数据分发组件演示
-        </h2>
-        <ul>
-          <li>
-            <Link to='/'>
-              <code>/home</code>
-            </Link>
-          </li>
-          <li>
-            <Link to='/admin'>
-              <code>/admin</code>
-            </Link>
-          </li>
-          <li>
-            <Link to='/user'>
-              <code>/user</code>
-            </Link>
-          </li>
-          <li>
-            <Link to='/login'>
-              <code>/login</code>
-            </Link>
-          </li>
-        </ul>
-        <hr />
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/user'  element={<User />}  /> 
-          <Route path='/' element={<Home />} />
-          <Route element={<Page404 />} />
-        </Routes>
-      </div>
+    {/* <h2 className='ui dividing header' style={{ padding: '1rem' }}>
+      数据分发组件演示
+    </h2> */}
+    {/* <Navigation /> */}
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/user' element={<User />} />
+        <Route path="*" element={<Page404 />} />
+      </Route>
+    </Routes>
   </Router>)
 
 
