@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 // To save user information
 const LOCAL_STORAGE_KEY = 'fsr-spotify-fake-auth';
 const LOCAL_NAME = 'fsr-user-name';
@@ -90,7 +92,28 @@ class Client{
     login(){
         console.log('login')
         // fetch from the server, RPC port,
-        
+        const url = "http://52.82.29.171:3001/rpc/v2"
+        const data = {
+            "id": 101,
+            "jsonrpc": "2.0",
+            "method": "login",
+            "params": {
+                "user": "admin",
+                "secret": "DiankeDemo"
+            }
+        }
+        fetch(url,{
+            method:'post',
+            headers:{
+                'Content-Type': 'application/json;charset=utf-8',
+                'Access-Control-Allow-Origin':'*',
+                'credentials': 'include'
+            },
+            mode: 'no-cors',
+            body: JSON.stringify(data)
+        }).then(result =>{
+            console.log(result)
+        })
 
 
         // this.token = TOKEN_VALUE;

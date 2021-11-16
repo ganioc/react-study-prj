@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, Header, Form, Segment, Message, Button } from 'semantic-ui-react'
+import { client } from '../../Client';
 
 class Login extends React.Component {
     constructor(){
@@ -25,6 +26,7 @@ class Login extends React.Component {
         // this.setState({ loginInProgress: true });
         console.log('username:', this.state.username)
         console.log('password:', this.state.password)
+        client.login();
 
     }
     render() {
