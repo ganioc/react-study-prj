@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Segment, Grid, List } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const pstyle = {
     "textIndent": "2rem"

@@ -13,7 +13,7 @@ const Login = () => {
                     <Segment stacked>
                         <Form.Input fluid icon='user' iconPosition='left' placeholder='用户' />
                         <Form.Input fluid icon='lock' iconPosition='left' placeholder='密码' type='password' />
-                        <Button color='teal' fluid size='large'>
+                        <Button color='blue' fluid size='large'>
                             登录
                         </Button>
                     </Segment>
