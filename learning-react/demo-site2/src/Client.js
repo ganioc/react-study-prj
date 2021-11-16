@@ -89,10 +89,14 @@ class Client{
     }
     login(){
         console.log('login')
-        this.token = TOKEN_VALUE;
-        if(this.useLocalStorage){
-            localStorage.setItem(LOCAL_STORAGE_KEY,this.token)
-        }
+        // fetch from the server, RPC port,
+        
+
+
+        // this.token = TOKEN_VALUE;
+        // if(this.useLocalStorage){
+        //     localStorage.setItem(LOCAL_STORAGE_KEY,this.token)
+        // }
     }
     logout(){
         this.removeToken();

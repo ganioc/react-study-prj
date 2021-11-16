@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Segment, Grid, List } from 'semantic-ui-react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const pstyle = {
     "textIndent": "2rem"
@@ -12,7 +12,7 @@ const Home = () => {
             <Header as='h1'>交通联盟链数据开放共享与数据安全关键技术
                 研究报告</Header>
 
-            <table class="ui   collapsing celled table">
+            <table className="ui   collapsing celled table">
                 <thead>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@ const Home = () => {
             <Header as="h2">
                 关于测试
             </Header>
-            <p><i class="angle right icon" />使用得到的用户名和密码
+            <p><i className="angle right icon" />使用得到的用户名和密码
                 <Link to='/login'>登录</Link>，以进行测试</p>
 
             <Segment vertical style={{ margin: '5rem 0rem 0rem', padding: '5rem 0rem' }}>

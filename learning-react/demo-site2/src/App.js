@@ -1,42 +1,19 @@
-import PropTypes from 'prop-types'
-import logo from './logo.svg'
+// import PropTypes from 'prop-types'
+
 import React from 'react'
 import './App.css';
-import { createBrowserHistory } from 'history';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  Redirect,
-  Outlet,
-  NavLink,
 } from 'react-router-dom';
 import Home from './components/home/Home'
 import DefaultTopBar from './components/topbar/DefaultTopBar';
 import Login from './components/login/Login'
 import Page404 from './components/404/Page404';
 
-// const Login = () => (
-//   <>
-//     <h3>登录</h3>
-//     <p>页面blah</p>
-//   </>
-// )
 
-const Admin = () => (
-  <>
-    <h3>Admin Page</h3>
-    <p>Admin can manipulate the creation of users.</p>
-  </>
-)
-
-const User = () => (
-  <>
-    <h3>User Page</h3>
-    <p>User page for Normal User.</p>
-  </>
-)
 // const Page404 = ({ location }) => (
 //   <>
 //     <h3>404 page</h3>
