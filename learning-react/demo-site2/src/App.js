@@ -142,6 +142,7 @@ const App = () => (
       <div className='row'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route Path='/login' element={<Login />} />
         </Routes>
       </div>
     </div>

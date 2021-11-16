@@ -9,45 +9,35 @@ import packageJson from '../../../package.json'
 export default function DefaultTopBar() {
 
     return (
-        <div className='ui huge top attached fluid secondary menu' style={{
-            display: 'flex',
-            background: 'white',
-        }}>
+        <div className='ui huge  top attached fluid secondary menu' >
             <div className='item'>
                 <h3
                     className='ui blue header'
-                    style={{
-                        marginTop: '0px',
-                        color: 'white'
-                    }}
+                    
                 >
                     数据分发共享组件{packageJson.version}
                 </h3>
             </div>
             {
-                client.isUserLoggedIn()&&(UserControls.map((result)=>{
-                    return(<Link className='item' to={result.to}>{result.alias}</Link>)
+                client.isUserLoggedIn() && (UserControls.map((result) => {
+                    return (<Link className='item' to={result.to}>{result.alias}</Link>)
                 }))
             }
             {
-                client.isAdminLoggedIn()&&(AdminControls.map((result)=>{
-                    return(<Link className='item' to={result.to}>{result.alias}</Link>)
+                client.isAdminLoggedIn() && (AdminControls.map((result) => {
+                    return (<Link className='item' to={result.to}>{result.alias}</Link>)
                 }))
             }
-            
+
             <div className='right menu'
             >
                 {
                     client.isLoggedIn() ? (
-                        <Link className=' item' to='/logout' style={{
-                            color: 'black'
-                        }}>
+                        <Link className=' item' to='/logout' >
                             退出
                         </Link>
                     ) : (
-                        <Link className='item' to='/login' style={{
-                            color: 'black'
-                        }}>
+                        <Link className='item' to='/login' >
                             登录
                         </Link>
                     )
