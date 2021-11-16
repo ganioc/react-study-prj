@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 import { Container, Header, List } from "semantic-ui-react";
 import MenuBar from './components/MenuBar';
-import Home from './components/Home'
+import Home from './components/home/Home'
 import { createMedia } from '@artsy/fresnel';
 import DefaultTopBar from './components/topbar/DefaultTopBar';
 

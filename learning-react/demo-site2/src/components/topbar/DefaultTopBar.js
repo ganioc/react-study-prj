@@ -13,7 +13,6 @@ export default function DefaultTopBar() {
             <div className='item'>
                 <h3
                     className='ui blue header'
-                    
                 >
                     数据分发共享组件{packageJson.version}
                 </h3>
