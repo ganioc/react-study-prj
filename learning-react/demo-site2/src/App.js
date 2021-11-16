@@ -12,16 +12,29 @@ import {
   Outlet,
   NavLink,
 } from 'react-router-dom';
-import TopBar from './components/TopBar';
-
-const Home = () => (
-  <div>
-    <h3>主页</h3>
-    <p>Home Page</p>
-  </div>
+import { Container, Header, List } from "semantic-ui-react";
+import MenuBar from './components/MenuBar';
+import Home from './components/Home'
+import { createMedia } from '@artsy/fresnel';
+import DefaultTopBar from './components/topbar/DefaultTopBar';
 
 
-)
+// const Home = () => (
+//   <div>
+//     <h3>主页</h3>
+//     <p>Home Page</p>
+//   </div>
+// )
+
+const { MediaContextProvider, Media } = createMedia({
+  breakpoints: {
+    mobile: 0,
+    tablet: 768,
+    computer: 1024
+  }
+})
+
+
 
 
 const Login = () => (
@@ -77,7 +90,7 @@ const Layout = () => {
   })
   return (
     <>
-      <TopBar></TopBar>
+      {/* <TopBar></TopBar> */}
       <div className='spacer row' />
       {/* <div className='row'>
         <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
@@ -102,22 +115,38 @@ const Layout = () => {
 
     </>);
 };
+// const App = () => (
+//   <Router>
+//     <Container style={{ margin: 20}} > 被666666666666666666666666666666666666666666666
+//       <Header as="h2">数据分发共享组件</Header>vvv她2415674
+//       {/* <TopBar></TopBar> */}
+//       {/* <div className='spacer row' /> */}
+//       <MenuBar />
+//       <Routes>
+//         <Route index element={<Home />} />
+//         <Route path='/' element={<Home />} />
+//         <Route path='/login' element={<Login />} />
+//         <Route path='/admin' element={<Admin />} />
+//         <Route path='/user' element={<User />} />
+//         <Route path="*" element={<Page404 />} />
+//       </Routes>
+//     </Container>
+//   </Router>
+// )
+
 const App = () => (
-  <div className='ui grid'>
-    
-    <Router>
-    <TopBar></TopBar>
-    <div className='spacer row' />
-      <Routes>
-          <Route index element={<Home />} />
+  <Router>
+    <div className='grid'>
+      <DefaultTopBar />
+      <div className='spacer row' />
+      <div className='row'>
+        <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/user' element={<User />} />
-          <Route path="*" element={<Page404 />} />
-      </Routes>
-    </Router> 
-  </div>)
+        </Routes>
+      </div>
+    </div>
+  </Router>
+)
 
 
 

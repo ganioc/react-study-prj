@@ -1,31 +1,55 @@
 // To save user information
 const LOCAL_STORAGE_KEY = 'fsr-spotify-fake-auth';
+const LOCAL_NAME = 'fsr-user-name';
+const LOCAL_ADDRESS = 'fsr-user-address';
+const LOCAL_PUBLIC_KEY = 'fsr-user-pubkey';
+const LOCAL_PRIV_KEY = 'fsr-user-privkey';
+const TOKEN_VALUE = '37219890'
+
 // 用来存放用户的信息
 class Client{
     constructor(){
         this.useLocalStorage = (typeof localStorage!== 'undefined');
         this.subscribers = [];
-        this.userName = '';
+        this.userName = ''; // admin or someone else
+        this.token= '';  // if this token is valid? 已经登录
+        this.address = '';
+        this.pubkey = '';
+        this.privkey = '';
 
         if(this.useLocalStorage){
             this.token = localStorage.getItem(LOCAL_STORAGE_KEY);
+            this.userName = localStorage.getItem(LOCAL_NAME);
+            this.address = localStorage.getItem(LOCAL_ADDRESS)
+            this.pubkey = localStorage.getItem(LOCAL_PUBLIC_KEY)
+            this.privkey = localStorage.getItem(LOCAL_PRIV_KEY)
 
             if(this.token){
-                this.isTokenValid().then((bool) =>{
-                    if(!bool){
-                        this.token = null;
-                    }
-                })
+                if(!this.isTokenValid()){
+                    this.token = null;
+                }
             }
         }
 
     }
     isTokenValid(){
         // check if token is valid, here we make it always valid
-        return true;
+        return this.token === TOKEN_VALUE;
     }
     isLoggedIn(){
         return !!this.token;
+    }
+    isAdminLoggedIn(){
+        return this.isLoggedIn() && this.isAdmin()
+    }
+    isUserLoggedIn(){
+        return this.isLoggedIn();
+    }
+    isAdmin(){
+        return this.userName === 'admin';
+    }
+    isNormalUser(){
+        return !this.isAdmin();
     }
     subscribe(cb){
         this.subscribers.push(cb);
@@ -45,8 +69,30 @@ class Client{
             localStorage.removeItem(LOCAL_STORAGE_KEY)
         }
     }
+    setPubkey(pubkey){
+        this.pubkey = pubkey;
+        if(this.useLocalStorage){
+            localStorage.setItem(LOCAL_PUBLIC_KEY, pubkey);
+        }
+    }
+    setAddress(addr){
+        this.address = addr;
+        if(this.useLocalStorage){
+            localStorage.setItem(LOCAL_ADDRESS,addr)
+        }
+    }
+    setPrivkey(priv){
+        this.privkey = priv;
+        if(this.useLocalStorage){
+            localStorage.setItem(LOCAL_PRIV_KEY,priv)
+        }
+    }
     login(){
         console.log('login')
+        this.token = TOKEN_VALUE;
+        if(this.useLocalStorage){
+            localStorage.setItem(LOCAL_STORAGE_KEY,this.token)
+        }
     }
     logout(){
         this.removeToken();
