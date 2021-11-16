@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { client } from '../../Client'
 import AdminControls from "./admin";
 import UserControls from "./user";

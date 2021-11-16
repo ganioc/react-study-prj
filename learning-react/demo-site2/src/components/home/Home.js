@@ -3,7 +3,7 @@ import { Container, Header, Segment, Grid, List } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const pstyle = {
-    "text-indent": "2rem"
+    "textIndent": "2rem"
 }
 
 const Home = () => {

@@ -12,37 +12,17 @@ import {
   Outlet,
   NavLink,
 } from 'react-router-dom';
-import { Container, Header, List } from "semantic-ui-react";
-import MenuBar from './components/MenuBar';
 import Home from './components/home/Home'
-import { createMedia } from '@artsy/fresnel';
 import DefaultTopBar from './components/topbar/DefaultTopBar';
+import Login from './components/login/Login'
+import Page404 from './components/404/Page404';
 
-
-// const Home = () => (
-//   <div>
-//     <h3>主页</h3>
-//     <p>Home Page</p>
-//   </div>
+// const Login = () => (
+//   <>
+//     <h3>登录</h3>
+//     <p>页面blah</p>
+//   </>
 // )
-
-const { MediaContextProvider, Media } = createMedia({
-  breakpoints: {
-    mobile: 0,
-    tablet: 768,
-    computer: 1024
-  }
-})
-
-
-
-
-const Login = () => (
-  <div>
-    <h3>登录</h3>
-    <p>用户登录</p>
-  </div>
-)
 
 const Admin = () => (
   <>
@@ -57,13 +37,13 @@ const User = () => (
     <p>User page for Normal User.</p>
   </>
 )
-const Page404 = ({ location }) => (
-  <>
-    <h3>404 page</h3>
-    <p style={{ background: '#ff0000', padding: '1rem', color: 'white' }} >Unknown url</p>
-    <Link to="/">home</Link>
-  </>
-)
+// const Page404 = ({ location }) => (
+//   <>
+//     <h3>404 page</h3>
+//     <p style={{ background: '#ff0000', padding: '1rem', color: 'white' }} >Unknown url</p>
+//     <Link to="/">home</Link>
+//   </>
+// )
 const Navigation = () => {
   return (
     <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
@@ -136,13 +116,13 @@ const Layout = () => {
 
 const App = () => (
   <Router>
-
       <DefaultTopBar />
       <div className='spacer row' />
       <div className='row'>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route Path='/login' element={<Login />} />
+          <Route index path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
   </Router>
