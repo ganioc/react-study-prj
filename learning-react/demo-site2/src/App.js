@@ -136,7 +136,7 @@ const Layout = () => {
 
 const App = () => (
   <Router>
-    <div className='grid'>
+
       <DefaultTopBar />
       <div className='spacer row' />
       <div className='row'>
@@ -145,7 +145,6 @@ const App = () => (
           <Route Path='/login' element={<Login />} />
         </Routes>
       </div>
-    </div>
   </Router>
 )
 

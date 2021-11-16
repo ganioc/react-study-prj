@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { client } from '../../Client'
 import AdminControls from "./admin";
 import UserControls from "./user";
@@ -11,20 +11,24 @@ export default function DefaultTopBar() {
     return (
         <div className='ui huge  top attached fluid secondary menu' >
             <div className='item'>
-                <h3
+                <img src="/images/logo.png" alt="logo.png" />
+            </div>
+            <div className='item'>
+                <NavLink className="ui blue header" to="/">数据分发共享组件{packageJson.version}</NavLink>
+                {/* <h3
                     className='ui blue header'
                 >
                     数据分发共享组件{packageJson.version}
-                </h3>
+                </h3> */}
             </div>
             {
                 client.isUserLoggedIn() && (UserControls.map((result) => {
-                    return (<Link className='item' to={result.to}>{result.alias}</Link>)
+                    return (<NavLink className='item' to={result.to}>{result.alias}</NavLink>)
                 }))
             }
             {
                 client.isAdminLoggedIn() && (AdminControls.map((result) => {
-                    return (<Link className='item' to={result.to}>{result.alias}</Link>)
+                    return (<NavLink className='item' to={result.to}>{result.alias}</NavLink>)
                 }))
             }
 
@@ -32,13 +36,13 @@ export default function DefaultTopBar() {
             >
                 {
                     client.isLoggedIn() ? (
-                        <Link className=' item' to='/logout' >
+                        <NavLink className=' item' to='/logout' >
                             退出
-                        </Link>
+                        </NavLink>
                     ) : (
-                        <Link className='item' to='/login' >
+                        <NavLink className='item' to='/login' >
                             登录
-                        </Link>
+                        </NavLink>
                     )
                 }
             </div>
