@@ -8,7 +8,7 @@ class Login extends React.Component {
         this.state = {
             loginInProgress: false,
             shouldRedirect: false,
-            error: false,
+            error: '',
             username: '',
             password: '',
         }
@@ -22,11 +22,20 @@ class Login extends React.Component {
         this.setState({ password: event.target.value})
     }
 
-    performLogin = (e) => {
+    performLogin = async (e) => {
         // this.setState({ loginInProgress: true });
         console.log('username:', this.state.username)
         console.log('password:', this.state.password)
-        client.login(this.state.username, this.state.password);
+        const result = await client.login(this.state.username, this.state.password);
+
+        if(result === 'OK'){
+            console.log('To set token')
+        }else{
+            console.log('error:', result)
+            this.setState({
+                error: result
+            })
+        }
 
     }
     render() {
@@ -48,7 +57,7 @@ class Login extends React.Component {
                         </Segment>
                     </Form>
 
-                    {this.state.error ? (<Message warning>error</Message>)
+                    {this.state.error ? (<Message error>{this.state.error}</Message>)
                         : (<Message>用户名和密码,请联系管理员</Message>)
                     }
 

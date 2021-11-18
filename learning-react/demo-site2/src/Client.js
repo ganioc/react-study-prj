@@ -89,7 +89,7 @@ class Client{
             localStorage.setItem(LOCAL_PRIV_KEY,priv)
         }
     }
-    login(name, password){
+    async login(name, password){
         console.log('login')
         // fetch from the server, RPC port,
         const url = "/rpc/v2"
@@ -102,30 +102,32 @@ class Client{
                 "secret": password
             }
         }
+        const response = await 
         fetch(url,{
             method:'post',
             headers:{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
-        }).then(result =>{
-            return result.json();
-        }).then(data=>{
-            console.log(data)
-            if(data.error.code){
-
-            }
-            if(data.result.data[0].result === 'OK' ){
-
-            }
         })
-
-
+        const result = await response.json()
+        
+        console.log(result)
+        if(result.error){
+            console.log('login failed')
+            return result.error.message
+        }
+        if(result.result.data[0].result === 'OK' ){
+            console.log('login OK')
+            return 'OK'
+        }
+        return 'No response'
         // this.token = TOKEN_VALUE;
         // if(this.useLocalStorage){
         //     localStorage.setItem(LOCAL_STORAGE_KEY,this.token)
         // }
     }
+
     logout(){
         this.removeToken();
     }
