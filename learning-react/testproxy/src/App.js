@@ -4,12 +4,12 @@ import './App.css';
 function App() {
   const handleClick = (e)=>{
     const rpcData = {
-      "id": 101,
+      "id": 104,
       "jsonrpc": "2.0",
       "method": "login",
       "params": {
           "user": "admin",
-          "secret": "DiankeDemo"
+          "secret": "DiankeDemo1"
       }
     }
     console.log('click')
@@ -20,10 +20,15 @@ function App() {
       },
       body: JSON.stringify(rpcData)
     }).then(resp => {
-      resp.json();
-      // console.log(resp.json())
+      // console.log(resp)
+      return resp.json();
+      
     }).then(data => {
       console.log(data)
+      // console.log(data.result)
+      // console.log(data.result.data[0].result)
+      // console.log(data.error.code)
+      console.log(data.error.code)  
     })
   }
 

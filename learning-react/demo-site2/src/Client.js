@@ -111,7 +111,9 @@ class Client{
             },
             body: JSON.stringify(data)
         }).then(result =>{
-            console.log(result)
+            return result.json();
+        }).then(data=>{
+            console.log(data)
         })
 
 
