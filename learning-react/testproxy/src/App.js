@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 function App() {
   const handleClick = (e)=>{
-    const data = {
+    const rpcData = {
       "id": 101,
       "jsonrpc": "2.0",
       "method": "login",
@@ -18,9 +18,12 @@ function App() {
       headers:{
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(rpcData)
     }).then(resp => {
-      console.log(resp)
+      resp.json();
+      // console.log(resp.json())
+    }).then(data => {
+      console.log(data)
     })
   }
 
