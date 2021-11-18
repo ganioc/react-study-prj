@@ -89,7 +89,7 @@ class Client{
             localStorage.setItem(LOCAL_PRIV_KEY,priv)
         }
     }
-    login(){
+    login(name, password){
         console.log('login')
         // fetch from the server, RPC port,
         const url = "/rpc/v2"
@@ -98,22 +98,26 @@ class Client{
             "jsonrpc": "2.0",
             "method": "login",
             "params": {
-                "user": "admin",
-                "secret": "DiankeDemo"
+                "user": name,
+                "secret": password
             }
         }
         fetch(url,{
             method:'post',
             headers:{
                 'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin':'*',
-                // 'credentials': 'include'
             },
             body: JSON.stringify(data)
         }).then(result =>{
             return result.json();
         }).then(data=>{
             console.log(data)
+            if(data.error.code){
+
+            }
+            if(data.result.data[0].result === 'OK' ){
+
+            }
         })
 
 

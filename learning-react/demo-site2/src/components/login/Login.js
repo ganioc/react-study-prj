@@ -26,7 +26,7 @@ class Login extends React.Component {
         // this.setState({ loginInProgress: true });
         console.log('username:', this.state.username)
         console.log('password:', this.state.password)
-        client.login();
+        client.login(this.state.username, this.state.password);
 
     }
     render() {
