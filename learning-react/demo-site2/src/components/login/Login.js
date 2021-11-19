@@ -1,4 +1,5 @@
 import React from 'react'
+// import { useNavigate } from 'react-router';
 import { Grid, Header, Form, Segment, Message, Button } from 'semantic-ui-react'
 import { client } from '../../Client';
 
@@ -23,17 +24,19 @@ class Login extends React.Component {
     }
 
     performLogin = async (e) => {
-        // this.setState({ loginInProgress: true });
+        this.setState({ loginInProgress: true });
         console.log('username:', this.state.username)
         console.log('password:', this.state.password)
         const result = await client.login(this.state.username, this.state.password);
 
         if(result === 'OK'){
             console.log('To set token')
+
         }else{
             console.log('error:', result)
             this.setState({
-                error: result
+                error: result,
+                loginInProgress: false
             })
         }
 

@@ -12,15 +12,9 @@ import Home from './components/home/Home'
 import DefaultTopBar from './components/topbar/DefaultTopBar';
 import Login from './components/login/Login'
 import Page404 from './components/404/Page404';
+import Logout from './components/login/Logout'
 
 
-// const Page404 = ({ location }) => (
-//   <>
-//     <h3>404 page</h3>
-//     <p style={{ background: '#ff0000', padding: '1rem', color: 'white' }} >Unknown url</p>
-//     <Link to="/">home</Link>
-//   </>
-// )
 const Navigation = () => {
   return (
     <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }} >
@@ -99,6 +93,7 @@ const App = () => (
         <Routes>
           <Route index path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </div>

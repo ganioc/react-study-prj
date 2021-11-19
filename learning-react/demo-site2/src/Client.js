@@ -71,6 +71,12 @@ class Client{
             localStorage.removeItem(LOCAL_STORAGE_KEY)
         }
     }
+    setUsername(name){
+        this.userName = name;
+        if(this.useLocalStorage){
+            localStorage.setItem(LOCAL_NAME, name)
+        }
+    }
     setPubkey(pubkey){
         this.pubkey = pubkey;
         if(this.useLocalStorage){
@@ -119,6 +125,8 @@ class Client{
         }
         if(result.result.data[0].result === 'OK' ){
             console.log('login OK')
+            this.setToken(TOKEN_VALUE)
+            this.setUsername(name)
             return 'OK'
         }
         return 'No response'
