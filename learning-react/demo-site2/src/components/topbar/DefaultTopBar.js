@@ -8,6 +8,8 @@ import packageJson from '../../../package.json'
 
 export default function DefaultTopBar() {
 
+    // const []
+
     return (
         <div className='ui huge  top attached fluid secondary menu' >
             <div className='item'>

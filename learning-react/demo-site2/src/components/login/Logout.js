@@ -1,15 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import { client } from '../../Client'
-
+import { NavLink } from 'react-router-dom';
 
 function Logout (){
-    client.logout();
-
+   
     let navigate = useNavigate();
 
+    useEffect(() => {
+        client.logout();
+        setTimeout(()=>{
+            navigate("/", {replace:true})
+        },3000)
+    })
+
     return(
-            <p>Logout</p>
+        <NavLink to='/'>主页</NavLink>
         )
 }
 

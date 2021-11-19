@@ -45,7 +45,7 @@ class Client{
         return this.isLoggedIn() && this.isAdmin()
     }
     isUserLoggedIn(){
-        return this.isLoggedIn();
+        return this.isLoggedIn() && !this.isAdmin();
     }
     isAdmin(){
         return this.userName === 'admin';
@@ -59,10 +59,10 @@ class Client{
     notifySubscribers(){
         this.subscribers.forEach((cb)=> cb(this.isLoggedIn()))
     }
-    setToken(token){
-        this.token = token;
+    setToken(){
+        this.token = TOKEN_VALUE;
         if(this.useLocalStorage){
-            localStorage.setItem(LOCAL_STORAGE_KEY, token)
+            localStorage.setItem(LOCAL_STORAGE_KEY, TOKEN_VALUE)
         }
     }
     removeToken(){
