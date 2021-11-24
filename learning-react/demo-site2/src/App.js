@@ -13,7 +13,9 @@ import DefaultTopBar from './components/topbar/DefaultTopBar';
 import Login from './components/login/Login'
 import Page404 from './components/404/Page404';
 import Logout from './components/login/Logout'
-
+import Admin from './components/admin/Admin'
+import User from './components/user/User'
+import { client } from './Client';
 
 const Navigation = () => {
   return (
@@ -85,20 +87,26 @@ const Layout = () => {
 //   </Router>
 // )
 
-const App = () => (
-  <Router>
-      <DefaultTopBar />
-      <div className='spacer row' />
-      <div className='row'>
-        <Routes>
-          <Route index path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-      </div>
-  </Router>
-)
+const App = () =>{
+  
+
+  return (
+    <Router>
+        <DefaultTopBar tokenValid={client.isTokenValid()} adminLoggedIn={client.isAdminLoggedIn()} userLoggedIn={client.isUserLoggedIn()} />
+        <div className='spacer row' />
+        <div className='row'>
+          <Routes>
+            <Route index path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/admin' element={<Admin />} />
+            <Route path='/user' element={<User />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </div>
+    </Router>
+  )
+} 
 
 
 

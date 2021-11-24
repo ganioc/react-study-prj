@@ -77,6 +77,12 @@ class Client{
             localStorage.setItem(LOCAL_NAME, name)
         }
     }
+    removeUsername(){
+        this.userName = null;
+        if(this.useLocalStorage){
+            localStorage.removeItem(LOCAL_NAME)
+        }
+    }
     setPubkey(pubkey){
         this.pubkey = pubkey;
         if(this.useLocalStorage){
@@ -138,6 +144,7 @@ class Client{
 
     logout(){
         this.removeToken();
+        this.removeUsername();
     }
 
 }
