@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState , useContext} from 'react'
 import { useNavigate } from 'react-router';
 // import { useNavigate } from 'react-router';
 import { Grid, Header, Form, Segment, Message, Button } from 'semantic-ui-react'
 import { client } from '../../Client';
-
+import { UserStateContext } from '../state/UserState';
 
 const LoginFunc = () => {
+    const { setTokenValid, setAdminLoggedIn, setUserLoggedIn } = useContext(UserStateContext)
     const [loginInProgress, setLoginInProgress] = useState(false);
 
     const [error, setError] = useState('')
@@ -22,6 +23,7 @@ const LoginFunc = () => {
 
     const performLogin = async () => {
         setLoginInProgress(true);
+        console.log("loginInProgress:", loginInProgress)
         console.log('username:', username);
         console.log('password:', password)
         const result = await client.login(username, password)
@@ -29,6 +31,10 @@ const LoginFunc = () => {
         if (result === 'OK') {
             console.log('To set token')
             client.setToken()
+
+            setTokenValid(client.isTokenValid())
+            setAdminLoggedIn(client.isAdminLoggedIn())
+            setUserLoggedIn(client.isUserLoggedIn())
 
             navigate((username === 'admin')?'/admin':'/user', { replace: true })
         } else {
@@ -51,7 +57,6 @@ const LoginFunc = () => {
                         <Button color='blue' fluid size='large' onClick={performLogin}>
                             登录
                         </Button>
-
                     </Segment>
                 </Form>
 

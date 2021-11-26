@@ -5,7 +5,7 @@ module.exports = function (app) {
         '/rpc',
         createProxyMiddleware(
             {
-                target: 'http://52.82.29.171:4001',
+                target: 'http://52.82.29.171:3001',
                 changeOrigin: true
             })
     )

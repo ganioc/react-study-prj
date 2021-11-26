@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Grid, Message, Header, Segment } from 'semantic-ui-react';
+import { Grid, Message, Header } from 'semantic-ui-react';
 
 const Page404 = ({ location }) => (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
