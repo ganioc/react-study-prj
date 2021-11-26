@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router';
 import { client } from '../../Client'
 import { Container, Header, Button, Icon, CommentActions } from 'semantic-ui-react'
 import { UserStateContext } from '../state/UserState';
+import { useInterval } from '../util';
 
 function Logout() {
     const { setTokenValid, setAdminLoggedIn, setUserLoggedIn } = useContext(UserStateContext)
     let navigate = useNavigate();
 
     let [counter, setCounter] = useState(5);
+    let [timer, setTimer] = useState(null);
     const counterRef = useRef(0);
+    counterRef.current = counter;
 
+    useInterval(()=>{
+        setCounter( counter -1)
+    },1000)
     
     
     useEffect(() => {
@@ -26,6 +32,8 @@ function Logout() {
 
         return () => {
             console.log("logout cleanup()")
+            clearInterval(timer);
+            setTimer(null)
         }
     }, [])
 
