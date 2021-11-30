@@ -1,3 +1,19 @@
+/* dark mode */
+.dark {
+  background: black;
+  color: rgb(194,194,194);
+}
+.dark header{
+  border-bottom: 1px solid rgb(56,56,56);
+}
+.light{
+  background: white;
+  color: black;
+}
+.light header{
+  border-bottom: 1px solid rgb(194,194,194);
+}
+
 .spacer.row {
   height: 50px;
 }

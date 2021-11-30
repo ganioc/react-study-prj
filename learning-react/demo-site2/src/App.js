@@ -23,8 +23,25 @@ const App = () => {
   const [isAdminLoggedIn, setAdminLoggedIn] = useState(client.isAdminLoggedIn());
   const [isUserLoggedIn, setUserLoggedIn] = useState(client.isUserLoggedIn())
 
+  const [theme , setTheme] = useState('light')
+
+  const defaults = {
+    getTheme(){
+      return theme;
+    },
+    setTheme(value){
+      document.body.classList.remove('dark', 'light');
+      document.body.classList.add(value);
+      setTheme(value)
+    },
+    name: 'Mehul',
+    getLogo(){
+      return (theme === 'dark')? 'white-logo': 'red-logo'
+    }
+  };
+
   return (
-    <UserStateContext.Provider value={{setTokenValid, setAdminLoggedIn, setUserLoggedIn}}>
+    <UserStateContext.Provider value={{setTokenValid, setAdminLoggedIn, setUserLoggedIn, defaults}}>
       <Router>
         <DefaultTopBar tokenValid={tokenValid} adminLoggedIn={isAdminLoggedIn} userLoggedIn={isUserLoggedIn} />
         <div className='spacer row' />

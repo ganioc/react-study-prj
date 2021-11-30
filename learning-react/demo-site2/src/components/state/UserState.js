@@ -4,7 +4,15 @@ import { createContext } from "react"
 //     bLoggedIn :false,
 //     bAdmin: false
 // }
+
+
 // 生成一个default value,
-const UserStateContext = createContext(null)
+// theme : light | dark
+const UserStateContext = createContext({
+    "setTokenValid":null,
+    "setAdminLoggedIn":null,
+    "setUserLoggedIn": null,
+    "theme":"light"
+})
 
 export { UserStateContext }
