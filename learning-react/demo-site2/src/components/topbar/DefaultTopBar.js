@@ -46,7 +46,7 @@ export default function DefaultTopBar(props) {
             <div className='right menu'>
                 <div className='item'>
                     <Radio toggle onChange={toggle} />
-                    <label>{defaults.getTheme()}</label>
+                    {/* <label>{defaults.getTheme()}</label> */}
                 </div>
 
                 {

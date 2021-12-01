@@ -6,6 +6,25 @@
 .dark header{
   border-bottom: 1px solid rgb(56,56,56);
 }
+.dark  *.item>a {
+  color: rgb(194,194,194)
+}
+/* .dark .segment{
+  color: white;
+} */
+.dark .ui.link.list .item{
+  color: white;
+}
+.dark .ui.header {
+  color: white;
+}
+.dark .ui.huge .item > a{
+  color: white;
+}
+.dark .ui.huge .right.menu .item >a {
+  color: white;
+}
+
 .light{
   background: white;
   color: black;
@@ -13,6 +32,7 @@
 .light header{
   border-bottom: 1px solid rgb(194,194,194);
 }
+
 
 .spacer.row {
   height: 50px;
