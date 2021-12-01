@@ -4,17 +4,21 @@ import AdminControls from "./admin";
 import UserControls from "./user";
 import { Radio } from 'semantic-ui-react'
 import packageJson from '../../../package.json'
-import { UserStateContext } from "../state/UserState";
+// import { UserStateContext } from "../state/UserState";
+import {context} from "../state/UserStateReducer"
 
 export default function DefaultTopBar(props) {
+    // const {defaults} =  useContext(UserStateContext);
+    const {state, dispatch} = useContext(context);
 
-    const {defaults} =  useContext(UserStateContext);
     let toggle = (e)=>{
-        console.log("toggle:", defaults.getTheme())
-        if(defaults.getTheme() === 'dark'){
-            defaults.setTheme('light')
+        console.log("toggle:", state.theme)
+        if(state.theme === 'dark'){
+            // defaults.setTheme('light')
+            dispatch({type:'SET_THEME', payload: 'light'})
         }else{
-            defaults.setTheme('dark')
+            // defaults.setTheme('dark')
+            dispatch({type:'SET_THEME', payload: 'dark'})
         }
     }
 
@@ -29,16 +33,16 @@ export default function DefaultTopBar(props) {
             {
                 props.userLoggedIn && (UserControls.map((result) => {
                     return (
-                    <div className='item'>
-                    <NavLink className='item' key={result.name} to={result.to}>{result.alias}</NavLink>
+                    <div className='item' key={result.name}>
+                    <NavLink className='item'  to={result.to}>{result.alias}</NavLink>
                     </div>)
                 }))
             }
             {
                 props.adminLoggedIn && (AdminControls.map((result) => {
                     return (
-                    <div className='item'>
-                    <NavLink className='item' key={result.name} to={result.to}>{result.alias}</NavLink>
+                    <div className='item' key={result.name}>
+                    <NavLink className='item' to={result.to}>{result.alias}</NavLink>
                     </div>)
                 }))
             }

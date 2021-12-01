@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types'
 
-import React, {useState} from 'react'
+import React, { useState, useReducer } from 'react'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -16,6 +16,7 @@ import Admin from './components/admin/Admin'
 import User from './components/user/User'
 import { client } from './Client';
 import { UserStateContext } from './components/state/UserState';
+import { Provider, defaultState, reducer } from './components/state/UserStateReducer';
 
 const App = () => {
   // 利用client来进行读取设置初始的值; 全局状态设置
@@ -23,43 +24,45 @@ const App = () => {
   const [isAdminLoggedIn, setAdminLoggedIn] = useState(client.isAdminLoggedIn());
   const [isUserLoggedIn, setUserLoggedIn] = useState(client.isUserLoggedIn())
 
-  const [theme , setTheme] = useState('light')
+  const [theme, setTheme] = useState('light')
+
+  const [state, dispatch] = useReducer(reducer, defaultState)
 
   const defaults = {
-    getTheme(){
+    getTheme() {
       return theme;
     },
-    setTheme(value){
+    setTheme(value) {
       document.body.classList.remove('dark', 'light');
       document.body.classList.add(value);
       setTheme(value)
     },
     name: 'Mehul',
-    getLogo(){
-      return (theme === 'dark')? 'white-logo': 'red-logo'
+    getLogo() {
+      return (theme === 'dark') ? 'white-logo' : 'red-logo'
     }
   };
 
   return (
-    <UserStateContext.Provider value={{setTokenValid, setAdminLoggedIn, setUserLoggedIn, defaults}}>
-      <Router>
-        <DefaultTopBar tokenValid={tokenValid} adminLoggedIn={isAdminLoggedIn} userLoggedIn={isUserLoggedIn} />
-        <div className='spacer row' />
-        <div className='row'>
-          <Routes>
-            <Route index path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/admin' element={<Admin />} />
-            <Route path='/user' element={<User />} />
-            <Route path="*" element={<Page404 />} />
-          </Routes>
-        </div>
-      </Router>
-    </UserStateContext.Provider>
+    <Provider value={{ state, dispatch }} >
+      <UserStateContext.Provider value={{ setTokenValid, setAdminLoggedIn, setUserLoggedIn, defaults }}>
+        <Router>
+          <DefaultTopBar tokenValid={tokenValid} adminLoggedIn={isAdminLoggedIn} userLoggedIn={isUserLoggedIn} />
+          <div className='spacer row' />
+          <div className='row'>
+            <Routes>
+              <Route index path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/admin' element={<Admin />} />
+              <Route path='/user' element={<User />} />
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          </div>
+        </Router>
+      </UserStateContext.Provider>
+    </Provider>
   )
 }
-
-
 
 export default App;
