@@ -16,7 +16,10 @@ server, 从client app目录里面添加<App> component; 使用renderToString()�
 
 
 ## learning-react/study-babel;
-使用babel,
+使用babel, 项目作废
+
+## learning-react/ssr-example;
+
 
 
 
